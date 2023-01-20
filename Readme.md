@@ -1,7 +1,7 @@
 # BACK-END DE LA RECETTE SOCIAL
 
 ## Introducción
-
+  
 Enhorabuena equipo, habéis empezado a desarrollar nuestra aplicación web y estamos bastante satisfechos del trabajo realizado con la base de datos. Ahora nos gustaría que abordaseis la parte del backend de nuestra aplicación. 
 
 Hemos seguido analizando los requerimientos que queremos tener en nuestra aplicación y os los detallamos a continuación
