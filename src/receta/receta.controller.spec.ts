@@ -33,4 +33,14 @@ describe('RecetaController', () => {
     };
     expect(controller.createReceta(newReceta)).toBe(newReceta);
   });
+ 
+  it('deleteReceta(5) should return "deleted with recetaId: 5', () => {
+    expect(controller.deleteReceta(5)).toContain("5");
+  });
+
+  it('updateReceta({title:"myReceta"}, 5) should return the Receta title', () => {
+    const recetaUpdated = {title: "myReceta"}; 
+    expect(controller.updateReceta(recetaUpdated, 5)).toContain('myReceta');
+
+});
 });

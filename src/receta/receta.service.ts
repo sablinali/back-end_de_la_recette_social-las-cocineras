@@ -13,4 +13,12 @@ export class RecetaService {
   createReceta(newReceta: any){
     return newReceta;
   }
+
+  deleteReceta(recetaId: number){
+    return `deleted with recetaId: ${recetaId}`
+  }
+
+  updateReceta(recetaId: number, newReceta: any) {
+    return `updated Receta: ${recetaId} with ${JSON.stringify(newReceta)}`
+  }
 }
