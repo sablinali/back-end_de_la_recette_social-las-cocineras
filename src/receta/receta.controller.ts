@@ -12,16 +12,15 @@ import {
 import { RecetaService } from './receta.service';
 import { Request } from 'express';
 import { RecetaDto } from './dtos/receta.dto';
-import { Receta } from './receta.class';
+import { Receta } from './entities/receta.entity';
 
 @Controller('receta')
 export class RecetaController {
   constructor(private readonly recetaService: RecetaService) {}
 
   @Get()
-  findAll(@Req() request: Request): Promise<Receta[]> {
-    console.log(request.query);
-    return this.recetaService.findAll(request.query);
+  findAll(): Promise<Receta[]> {
+    return this.recetaService.findAll();
   }
 
   @Get(':recetaId')
@@ -35,8 +34,8 @@ export class RecetaController {
   }
 
   @Delete(':recetaId')
-  deleteReceta(@Param('recetaId') recetaId: number): Receta {
-    return this.recetaService.deleteReceta(recetaId);
+  deleteReceta(@Param('recetaId') recetaId: string){
+    return this.recetaService.deleteReceta(+recetaId);
   }
 
   @Put(':recetaId')

@@ -6,16 +6,16 @@ export class Receta {
   id_receta: number;
 
   @Column()
-  nombre: string;
+  nombre_receta: string;
 
   @Column()
-  tipo: string;
+  tipo_receta: string;
 
   @Column()
   valoracion: number;
 
   @Column()
-  tiempo_cocina_min: number;
+  tiempo_cocina: number;
 
   @Column()
   num_visitas: number;
