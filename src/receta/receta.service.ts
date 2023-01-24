@@ -1,60 +1,39 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { RecetaDto } from './dtos/receta.dto';
-import { Receta } from './receta.class';
+import { Receta } from './entities/receta.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RecetaService {
-  receta: Receta[]=[
-    {
-    id_receta: 1;
-    nombre: 'receta1';
-    tipo: 'acompañante';
-    valoracion: 5;
-    tiempo_cocina_min: 40;
-    num_visitas: 12;
-    num_veces_compartido: 155;
-    pais: 'España';
-    comentarios: 'muy bueno';
-    },
-    {
-    id_receta: 2;
-    nombre: 'receta2';
-    tipo: 'postre';
-    valoracion: 6;
-    tiempo_cocina_min: 25;
-    num_visitas: 15;
-    num_veces_compartido: 23;
-    pais: 'Perú';
-    comentarios: 'buenísimo';
-    },
-    ]
+  constructor(
+    @InjectRepository(Receta) private recetaRepository: Repository<Receta>,
+  ) {}
 
-
-  findAll(params): Receta[] {
-    return this.receta;
+  async findAll(params): Promise<Receta[]> {
+    return await this.recetaRepository.find();
   }
 
-  findReceta(recetaId: number): Receta{
-    return this.receta[(recetaId)-1]
+  async findReceta(recetaId: number): Promise<Receta> {
+    return await this.recetaRepository.findOne({
+      where: { id_receta: recetaId },
+    });
   }
 
-  createReceta(newReceta: RecetaDto): Receta{
-    const receta = new Receta();
-
-    receta.id_receta = 99; 
-    receta.nombre: newReceta.nombre;
-    receta.tipo: newReceta.tipo;
-    receta.tiempo_cocina_min: newReceta.tiempo_cocina_min;
-    receta.pais: newReceta.pais;
-
-    return receta;
+  createReceta(newReceta: RecetaDto): Promise<Receta> {
+    return this.recetaRepository.save(newReceta);
   }
 
-  deleteReceta(recetaId: number): Receta{
-    return this.receta[(recetaId) - 1]
+  deleteReceta(recetaId: number) {
+    return this.recetaRepository.delete({ id_receta: recetaId });
   }
 
-  updateReceta(recetaId: number, newReceta: RecetaDto): Receta {
-    return this.receta[(recetaId)-1];
+  async updateReceta(recetaId: number, newReceta: RecetaDto): Promise<Receta> {
+    const toUpdate = await this.recetaRepository.findOne({
+      where: { id_receta: recetaId },
+    });
+    const updated = Object.assign(toUpdate, newReceta);
+
+    return this.recetaRepository.save(updated);
   }
 }
