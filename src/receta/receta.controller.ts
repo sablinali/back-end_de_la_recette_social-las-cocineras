@@ -8,11 +8,13 @@ import {
   Put,
   Query,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { RecetaService } from './receta.service';
 import { Request } from 'express';
 import { RecetaDto } from './dtos/receta.dto';
 import { Receta } from './entities/receta.entity';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('receta')
 export class RecetaController {
@@ -28,6 +30,7 @@ export class RecetaController {
     return this.recetaService.findReceta(recetaId);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   createReceta(@Body() newReceta: RecetaDto): Promise<Receta> {
     return this.recetaService.createReceta(newReceta);
