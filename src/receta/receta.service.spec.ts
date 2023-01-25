@@ -27,4 +27,13 @@ describe('RecetaService', () => {
     };
     expect(service.createReceta(newReceta)).toBe(newReceta);
   });
+  it('deleteReceta(5) shoould return "deleted with recetaId: 5"', () => {
+    expect(service.deleteReceta(5)).toContain("5")
+  });
+  it('updateReceta(5, {title:"myReceta"}) should return the Receta title', () => {
+    const recetaUpdated = {title: "myReceta"}
+    expect(service.updateReceta(5, recetaUpdated)).toContain('myReceta');
+  });
 });
+
+
