@@ -16,11 +16,11 @@ export class UsersService {
     return this.userRepository.save(createUserDto);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  findAll():Promise<User[]> {
+    return this.userRepository.find();
   }
 
-  findOne(id: number) {
+  findOne(id: number): string {
     return `This action returns a #${id} user`;
   }
 
