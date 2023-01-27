@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { IngredienteService } from './ingrediente.service';
 import { CreateIngredienteDto } from './dto/create-ingrediente.dto';
 import { UpdateIngredienteDto } from './dto/update-ingrediente.dto';
+import { Ingrediente } from './entities/ingrediente.entity';
 
 @Controller('ingrediente')
 export class IngredienteController {
@@ -13,7 +14,7 @@ export class IngredienteController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<Ingrediente[]> {
     return this.ingredienteService.findAll();
   }
 

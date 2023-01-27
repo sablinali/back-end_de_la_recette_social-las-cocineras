@@ -1,15 +1,22 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateIngredienteDto } from './dto/create-ingrediente.dto';
 import { UpdateIngredienteDto } from './dto/update-ingrediente.dto';
+import { Ingrediente } from './entities/ingrediente.entity';
 
 @Injectable()
 export class IngredienteService {
+  constructor(
+    @InjectRepository(Ingrediente) private ingredienteRepository: Repository<Ingrediente>,
+  ) {}
+
   create(createIngredienteDto: CreateIngredienteDto) {
     return 'This action adds a new ingrediente';
   }
 
-  findAll() {
-    return `This action returns all ingrediente`;
+  async findAll(): Promise<Ingrediente[]> {
+    return await this.ingredienteRepository.find();
   }
 
   findOne(id: number) {

@@ -1,6 +1,7 @@
 import { Receta } from 'src/receta/entities/receta.entity';
-import { Column, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 export class Ingrediente {
   @PrimaryGeneratedColumn()
   id_ingrediente: number;
