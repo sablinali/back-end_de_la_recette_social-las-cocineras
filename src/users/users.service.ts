@@ -16,7 +16,7 @@ export class UsersService {
     return this.userRepository.save(createUserDto);
   }
 
-  findAll():Promise<User[]> {
+  findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
 
@@ -24,8 +24,8 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  async findOneByNombreUsuario(nombre_usuario:string): Promise<User> {
-    return this.userRepository.findOne({where:{nombre_usuario}})
+  async findOneByNombreUsuario(nombre_usuario: string): Promise<User> {
+    return this.userRepository.findOne({ where: { nombre_usuario } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Ingrediente } from 'src/ingrediente/entities/ingrediente.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinTable,
+  ManyToOne,
+} from 'typeorm';
 
 @Entity()
 export class Receta {
@@ -31,4 +38,11 @@ export class Receta {
 
   @Column('text')
   instrucciones: string;
+
+  // @ManyToOne(
+  //   () => Ingrediente,
+  //   (ingrediente: Ingrediente) => ingrediente.receta
+  // )
+  // @JoinTable()
+  // ingrediente: Ingrediente[];
 }
