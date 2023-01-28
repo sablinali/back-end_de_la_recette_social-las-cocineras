@@ -11,6 +11,7 @@ import { AuthService } from './auth/auth.service';
 import { LoginController } from './auth/login.controller';
 import { IngredienteModule } from './ingrediente/ingrediente.module';
 import { ListaCompraModule } from './lista_compra/lista_compra.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,8 +20,9 @@ import { ListaCompraModule } from './lista_compra/lista_compra.module';
     UsersModule,
     IngredienteModule,
     ListaCompraModule,
+    AuthModule,
   ],
-  controllers: [AppController, LoginController],
-  providers: [AppService, AuthService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

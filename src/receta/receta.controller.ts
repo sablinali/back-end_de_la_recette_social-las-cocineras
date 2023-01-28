@@ -15,6 +15,7 @@ import { Request } from 'express';
 import { RecetaDto } from './dtos/receta.dto';
 import { Receta } from './entities/receta.entity';
 import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.service';
 
 @Controller('receta')
 export class RecetaController {
@@ -30,7 +31,7 @@ export class RecetaController {
     return this.recetaService.findReceta(recetaId);
   }
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   @Post()
   createReceta(@Body() newReceta: RecetaDto): Promise<Receta> {
     return this.recetaService.createReceta(newReceta);
