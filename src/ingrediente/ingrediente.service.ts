@@ -15,6 +15,12 @@ export class IngredienteService {
     return 'This action adds a new ingrediente';
   }
 
+  createIngrediente(
+    newIngrediente: CreateIngredienteDto
+  ): Promise<Ingrediente> {
+    return this.ingredienteRepository.save(newIngrediente);
+  }
+
   async findAll(): Promise<Ingrediente[]> {
     return await this.ingredienteRepository.find();
   }

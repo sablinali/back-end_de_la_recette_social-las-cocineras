@@ -1,5 +1,11 @@
 import { Receta } from 'src/receta/entities/receta.entity';
-import { Column, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Ingrediente {
@@ -12,8 +18,6 @@ export class Ingrediente {
   @Column()
   unidades_cantidad: string;
 
-
-//   @OneToMany(() => Receta, (receta: Receta) => receta.ingrediente)
-//   @JoinTable()
-//   receta: Receta[];
- }
+  @OneToMany(() => Receta, (receta: Receta) => receta.ingrediente)
+  receta: Receta[];
+}

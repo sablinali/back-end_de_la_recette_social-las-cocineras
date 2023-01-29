@@ -20,7 +20,7 @@ export class AuthService {
       const user = await this.userService.findOneByNombreUsuario(
         nombre_usuario,
       );
-
+      
       if (user && user.contraseña_registro === contraseña_registro) {
         const { contraseña_registro, ...result } = user;
         return result;

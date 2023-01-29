@@ -7,10 +7,6 @@ export class ListaCompra {
   @PrimaryGeneratedColumn()
   id_lista_compra: number;
 
-//   @ApiProperty()
-//   @PrimaryGeneratedColumn()
-//   id_usuario: number;
-
   @ApiProperty()
   @Column()
   nombre_ingrediente: string;
