@@ -8,11 +8,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: 'palabra secreta',
-      ignoreExpiration: false,
+      // ignoreExpiration: true,
     });
   }
 
   async validate(payload: any): Promise<any> {
+    console.log(payload);
     if (!payload) {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
     }

@@ -4,7 +4,8 @@ import {
   Column,
   PrimaryGeneratedColumn,
   JoinTable,
-  ManyToOne
+  ManyToOne,
+  OneToMany
 } from 'typeorm';
 
 @Entity()
@@ -39,9 +40,11 @@ export class Receta {
   @Column('text')
   instrucciones: string;
 
-  @ManyToOne(
+  @OneToMany(
     () => Ingrediente,
-    (ingrediente: Ingrediente) => ingrediente.receta
+    (ingredientes: Ingrediente) => {
+      console.log(ingredientes.receta);
+    }
   )
-  ingrediente: Ingrediente[];
+  ingredientes: Ingrediente[];
 }

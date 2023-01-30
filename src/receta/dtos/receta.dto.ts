@@ -7,5 +7,5 @@ export class RecetaDto {
   readonly pais: string;
   readonly instrucciones: string;
 
-  readonly ingrediente: Ingrediente[];
+  readonly ingrediente: Ingrediente;
 }

@@ -31,7 +31,7 @@ export class AuthService {
     }
   }
 
-  async login(user: User) {
+  async login(user: any) {
     try {
       const validateUser = await this.validateUser(
         user.nombre_usuario,
