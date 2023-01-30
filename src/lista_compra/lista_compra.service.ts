@@ -13,16 +13,26 @@ export class ListaCompraService {
   ) {}
 
 
-  create(createListaCompraDto: CreateListaCompraDto) {
-    return 'This action adds a new listaCompra';
+  createListaCompra(
+    createListaCompraDto: CreateListaCompraDto,
+    id_usuario: number
+  ) {
+    createListaCompraDto.id_usuario = id_usuario;
+    return this.listaCompraRepository.save(createListaCompraDto);
   }
 
   findAll() {
-    return `This action returns all listaCompra`;
+    return this.listaCompraRepository.find();
   }
 
   findOne(id: number) {
     return `This action returns a #${id} listaCompra`;
+  }
+
+  findByUserId(id_usuario: number) {
+    return this.listaCompraRepository.find({
+      where: { id_usuario: id_usuario }
+    });
   }
 
   update(id: number, updateListaCompraDto: UpdateListaCompraDto) {

@@ -14,15 +14,15 @@ export class AuthService {
 
   async validateUser(
     nombre_usuario: string,
-    contraseña_registro: string,
+    password: string,
   ): Promise<IUser> {
     try {
       const user = await this.userService.findOneByNombreUsuario(
         nombre_usuario,
       );
       
-      if (user && user.contraseña_registro === contraseña_registro) {
-        const { contraseña_registro, ...result } = user;
+      if (user && user.password === password) {
+        const { password, ...result } = user;
         return result;
       }
       return null;
@@ -35,7 +35,7 @@ export class AuthService {
     try {
       const validateUser = await this.validateUser(
         user.nombre_usuario,
-        user.contraseña_registro,
+        user.password,
       );
       const payload = {
         nombre_usuario: validateUser.nombre_usuario,

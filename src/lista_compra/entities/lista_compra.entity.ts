@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Receta } from 'src/receta/entities/receta.entity';
-import { Column, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 export class ListaCompra {
   @ApiProperty()
   @PrimaryGeneratedColumn()
@@ -22,6 +23,10 @@ export class ListaCompra {
   @ApiProperty()
   @Column()
   id_usuario: number;
+
+  @ApiProperty()
+  @Column()
+  id_ingrediente: number;
 
 //   @ManyToMany(() => Receta, (receta: Receta) => receta.listaCompra)
 //   receta: Receta[];
