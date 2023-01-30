@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Receta } from './entities/receta.entity';
 import { RecetaService } from './receta.service';
 
 describe('RecetaService', () => {
@@ -34,6 +36,39 @@ describe('RecetaService', () => {
     const recetaUpdated = {title: "myReceta"}
     expect(service.updateReceta(5, recetaUpdated)).toContain('myReceta');
   });
+  
 });
 
+
+const data:Receta[] =  [ {
+  nombre_receta: 'pan',
+  tipo_receta: 'acompañamiento',
+  tiempo_cocina: 120,
+  pais: 'españa',
+  instrucciones: 'url',
+  ingredientes: ['harina'];
+},
+{
+  nombre_receta: 'pastel';
+  tipo_receta: 'postre';
+  tiempo_cocina: 60;
+  pais: 'andorra';
+  instrucciones: 'url';
+  ingrediente: 'mantequilla';
+},
+];
+const mockRecetaRepository = {
+  find: jest.fn().mockResolvedValue({data}),
+}
+describe('RecetaService', () => {
+  let service: RecetaService;
+  beforeAll(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [RecetaService],
+      {
+        provide: getRepositoryToken(Receta),
+        useValue: (mockRecetaRepository)
+      }
+    }).compile();
+  }});
 

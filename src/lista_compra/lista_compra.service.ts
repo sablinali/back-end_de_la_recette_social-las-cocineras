@@ -9,15 +9,30 @@ import { ListaCompra } from './entities/lista_compra.entity';
 export class ListaCompraService {
   constructor(
     @InjectRepository(ListaCompra)
-    private listaCompraRepository: Repository<ListaCompra>,
+    private listaCompraRepository: Repository<ListaCompra>
   ) {}
-
 
   createListaCompra(
     createListaCompraDto: CreateListaCompraDto,
     id_usuario: number
   ) {
     createListaCompraDto.id_usuario = id_usuario;
+
+    // const result = this.listaCompraRepository.reduce((acc, curr) => {
+    //   const id_ingrediente = createListaCompraDto.id_ingrediente;
+    //   let cantidad_ingrediente = createListaCompraDto.cantidad_ingrediente;
+      
+    //   const exists = acc.find(
+    //     (item) => item.id_ingrediente === curr.id_ingrediente
+    //   );
+    //   if (exists) {
+    //     cantidad_ingrediente += curr.cantidad_ingrediente;
+    //     return acc;
+    //   }
+    //   return [...acc, curr];
+    // }, []);
+
+    // console.log(result);
     return this.listaCompraRepository.save(createListaCompraDto);
   }
 

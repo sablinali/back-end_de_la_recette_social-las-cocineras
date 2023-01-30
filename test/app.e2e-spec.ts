@@ -25,4 +25,6 @@ describe('AppController (e2e)', () => {
   it('/receta (GET)', () => {
     return request(app.getHttpServer()).get('/receta').expect(200).expect('findAll working');
   });
+
+  
 });
