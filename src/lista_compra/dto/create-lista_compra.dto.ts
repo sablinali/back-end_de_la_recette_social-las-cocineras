@@ -1,7 +1,22 @@
+import { ApiProperty } from '@nestjs/swagger';
+import { Ingrediente } from 'src/ingrediente/entities/ingrediente.entity';
+
 export class CreateListaCompraDto {
-  id_ingrediente: number;
-  readonly nombre_ingrediente: string;
+  // @ApiProperty({ example: 1 })
+  // id_ingrediente: number;
+
+  // @ApiProperty({ example: 'harina' })
+  // readonly nombre_ingrediente: string;
+
+  @ApiProperty({ example: 1 })
   id_usuario: number;
-  cantidad_ingrediente: number;
-//   readonly unidades_cantidad: string;
+
+  // @ApiProperty({ example: 100 })
+  // cantidad_ingrediente: number;
+
+  ingredientes: Array<{
+    id_ingrediente: number;
+    cantidad_ingrediente: number;
+    nombre_ingrediente: string;
+  }>;
 }

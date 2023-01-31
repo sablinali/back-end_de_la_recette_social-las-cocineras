@@ -2,6 +2,7 @@ import { Receta } from 'src/receta/entities/receta.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToOne,
   OneToMany,
@@ -20,5 +21,6 @@ export class Ingrediente {
   unidades_cantidad: string;
 
   @ManyToOne(() => Receta, (receta: Receta) => receta.ingredientes)
+  @JoinColumn({ name: 'id_ingrediente' })
   receta: Receta;
 }

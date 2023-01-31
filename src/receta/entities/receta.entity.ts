@@ -5,7 +5,8 @@ import {
   PrimaryGeneratedColumn,
   JoinTable,
   ManyToOne,
-  OneToMany
+  OneToMany,
+  JoinColumn
 } from 'typeorm';
 
 @Entity()
@@ -42,9 +43,11 @@ export class Receta {
 
   @OneToMany(
     () => Ingrediente,
+    // { cascade: ['delete', 'update'] },
     (ingredientes: Ingrediente) => {
       console.log(ingredientes.receta);
     }
   )
+  @JoinColumn({ name: 'id_ingrediente' })
   ingredientes: Ingrediente[];
 }

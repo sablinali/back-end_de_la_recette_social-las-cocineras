@@ -9,18 +9,15 @@ import { UsersService } from 'src/users/users.service';
 export class AuthService {
   constructor(
     private userService: UsersService,
-    private jwtService: JwtService,
+    private jwtService: JwtService
   ) {}
 
-  async validateUser(
-    nombre_usuario: string,
-    password: string,
-  ): Promise<IUser> {
+  async validateUser(nombre_usuario: string, password: string): Promise<IUser> {
     try {
       const user = await this.userService.findOneByNombreUsuario(
-        nombre_usuario,
+        nombre_usuario
       );
-      
+
       if (user && user.password === password) {
         const { password, ...result } = user;
         return result;
@@ -35,14 +32,14 @@ export class AuthService {
     try {
       const validateUser = await this.validateUser(
         user.nombre_usuario,
-        user.password,
+        user.password
       );
       const payload = {
         nombre_usuario: validateUser.nombre_usuario,
-        sub: validateUser.id_registro,
+        sub: validateUser.id_registro
       };
       return {
-        access_token: this.jwtService.sign(payload),
+        access_token: this.jwtService.sign(payload)
       };
     } catch (error) {
       throw new UnauthorizedException();

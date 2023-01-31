@@ -16,6 +16,7 @@ import { RecetaDto } from './dtos/receta.dto';
 import { Receta } from './entities/receta.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.service';
+import { ApiOperation } from '@nestjs/swagger';
 
 @Controller('receta')
 export class RecetaController {

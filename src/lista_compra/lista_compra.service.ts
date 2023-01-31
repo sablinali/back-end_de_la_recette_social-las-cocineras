@@ -12,28 +12,36 @@ export class ListaCompraService {
     private listaCompraRepository: Repository<ListaCompra>
   ) {}
 
-  createListaCompra(
+  async createListaCompra(
     createListaCompraDto: CreateListaCompraDto,
     id_usuario: number
   ) {
+    console.log(createListaCompraDto.ingredientes, id_usuario);
     createListaCompraDto.id_usuario = id_usuario;
 
-    // const result = this.listaCompraRepository.reduce((acc, curr) => {
-    //   const id_ingrediente = createListaCompraDto.id_ingrediente;
-    //   let cantidad_ingrediente = createListaCompraDto.cantidad_ingrediente;
-      
-    //   const exists = acc.find(
-    //     (item) => item.id_ingrediente === curr.id_ingrediente
-    //   );
-    //   if (exists) {
-    //     cantidad_ingrediente += curr.cantidad_ingrediente;
-    //     return acc;
-    //   }
-    //   return [...acc, curr];
-    // }, []);
-
-    // console.log(result);
-    return this.listaCompraRepository.save(createListaCompraDto);
+    createListaCompraDto.ingredientes.forEach(async (el) => {
+      const result: any = await this.listaCompraRepository.findOne({
+        where: {
+          id_ingrediente: el.id_ingrediente,
+          id_usuario: createListaCompraDto.id_usuario
+        }
+      });
+      console.log(result);
+      const listaCompra = {
+        nombre_ingrediente: el.nombre_ingrediente,
+        cantidad_ingrediente: el.cantidad_ingrediente,
+        unidades_cantidad: null,
+        id_usuario: createListaCompraDto.id_usuario,
+        id_ingrediente: el.id_ingrediente
+      };
+      if (!result) {
+        return this.listaCompraRepository.save(listaCompra);
+      } else {
+        result.cantidad_ingrediente += el.cantidad_ingrediente;
+        return this.listaCompraRepository.save(result);
+      }
+    });
+    return this.listaCompraRepository.find({ where: { id_usuario } });
   }
 
   findAll() {
