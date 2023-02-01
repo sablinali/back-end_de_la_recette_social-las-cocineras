@@ -54,3 +54,9 @@ _****_
 _****_
 
 <mark style="color:purple;">**GET**</mark>**     **     [**http://localhost:3000/la-recette/lista-compra/1**](http://localhost:3000/la-recette/lista-compra/1)   **           **_**To get one user's lista-compra.**_
+
+_****_
+
+#### SWAGGER
+
+![](.gitbook/assets/image.png)
